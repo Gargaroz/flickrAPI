@@ -1,7 +1,12 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" ng-repeat="img in all.displayedPhotos">
+    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="img in all.displayedPhotos">
       <img class="img-responsive img-thumbnail" ng-src="{{img.url_q}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <ul uib-pagination total-items="all.totalItems" ng-model="all.currentPage" items-per-page="all.maxItems" class="pagination-sm" boundary-links="true" force-ellipses="true" ng-change="all.stepPage()"></ul>
     </div>
   </div>
 </div>
