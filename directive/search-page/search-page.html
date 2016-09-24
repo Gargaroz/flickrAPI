@@ -1,12 +1,55 @@
-<form class="form-horizontal" ng-submit="search.getFlickrImage()">
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group">
-    <label for="tag">Tag</label>
-    <input type="text" class="form-control" id="tag" ng-model="search.tag" required>
+<div class="container-fluid">
+  <form class="col-xs-12 form-horizontal" ng-submit="search.getFlickrImage()">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="form-group">
+          <label for="tag">Tag</label>
+          <input type="text" class="form-control" id="tag" ng-model="search.tag" required>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="form-group">
+          <label for="userId">Flickr user ID (optional)</label>
+          <input type="text" class="form-control" id="userId" ng-model="search.userId">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="center-block alert-danger" uib-alert ng-if="search.errorMessage">{{search.errorMessage}}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 col-xs-offset-6">
+        <div class="row">
+          <button type="button" id="clear" class="btn btn-warning pull-right" ng-click="search.clear()">Clear</button>
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <div class="row">
+          <button type="submit" id="submit" class="btn btn-primary pull-right">Search</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 media" ng-repeat="img in search.photoResults track by $index">
+      <div class="media-left">
+        <a href="">
+          <img class="media-object" ng-src="{{img.url_q}}" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">{{img.title}} <span title="Views" class="badge">{{img.views}}</span></h4>
+        <dl class="">
+          <dt>Owner</dt>
+          <dd>{{img.ownername}}</dd>
+          <dt>Taken</dt>
+          <dd>{{img.datetaken}}</dd>
+          <dt>Uploaded</dt>
+          <dd>{{img.dateupload}}</dd>
+        </dl>
+      </div>
+    </div>
   </div>
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group">
-    <label for="userId">Flickr user ID (optional)</label>
-    <input type="text" class="form-control" id="userId" ng-model="search.userId">
-  </div>
-  <button type="submit" id="submit" class="btn btn-primary">Search</button>
-  <button type="button" id="clear" class="btn btn-warning" ng-click="search.clear()">Clear</button>
-</form>
+</div>
