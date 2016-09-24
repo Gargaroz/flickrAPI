@@ -1,1 +1,12 @@
-<div></div>
+<form class="form-horizontal" ng-submit="search.getFlickrImage()">
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group">
+    <label for="tag">Tag</label>
+    <input type="text" class="form-control" id="tag" ng-model="search.tag" required>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group">
+    <label for="userId">Flickr user ID (optional)</label>
+    <input type="text" class="form-control" id="userId" ng-model="search.userId">
+  </div>
+  <button type="submit" id="submit" class="btn btn-primary">Search</button>
+  <button type="button" id="clear" class="btn btn-warning" ng-click="search.clear()">Clear</button>
+</form>
