@@ -22,16 +22,35 @@ angular.module('flickrAPI').factory('flickrApi',['$http', 'flickrUtils', functio
 			'&format=json&' +
 			'jsoncallback=' + 'JSON_CALLBACK')
 				.then(function(response) {
-          console.log("response = ", response.data);
           dataLoading = false;
           return response.data; 
         }, function(response) {
-          console.log('error', response);
+          dataLoading = false;
+        });
+    };
+    
+    var _getFlickrBatch = function(tag, userId) {
+      if (dataLoading) return;
+			dataLoading = true;
+			return $http.jsonp(url + '?method=' + methods.search +
+      '&api_key=' + flickrUtils.KEY +
+      '&tags=' + tag +
+      (userId ? '&user_id=' + userId : '') +
+			'&sort=' + sort +
+      '&extras=' + extras +
+			'&format=json&' +
+			'jsoncallback=' + 'JSON_CALLBACK')
+				.then(function(response) {
+          dataLoading = false;
+          console.log("response.data", response.data);
+          return response.data;
+        }, function(response) {
           dataLoading = false;
         });
     };
 
     return {
-      getFlickrImage: _getFlickrImage
+      getFlickrImage: _getFlickrImage,
+      getFlickrBatch: _getFlickrBatch
     };
 }]);

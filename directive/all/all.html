@@ -1,4 +1,7 @@
-<div>
-
-
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2" ng-repeat="img in all.displayedPhotos">
+      <img class="img-responsive img-thumbnail" ng-src="{{img.url_q}}">
+    </div>
+  </div>
 </div>
