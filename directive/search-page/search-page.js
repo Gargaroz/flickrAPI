@@ -14,10 +14,11 @@ angular.module('flickrAPI').directive('searchPage', function() {
             flickrApi.getFlickrImage(vm.tag, vm.userId).then(function(ret){
               if (ret.message) {
                 vm.errorMessage = ret.message;
-              } else {
-                console.log("ret", ret);
-                ret.photos.photo.length == 1 ? vm.photoResults = ret.photos.photo.concat(vm.photoResults) : vm.errorMessage = 'No photos found';
-              }
+              } else if (ret.photos.photo.length == 1) {
+                var photo = ret.photos.photo.pop();
+                photo.tag = vm.tag;
+                vm.photoResults.unshift(photo);
+              } else vm.errorMessage = 'No photos found'
               vm.clear();
             });
           };
