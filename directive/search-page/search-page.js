@@ -4,7 +4,7 @@ angular.module('flickrAPI').directive('searchPage', function() {
         replace: true,
         scope: {},
         templateUrl: 'directive/search-page/search-page.html',
-        controller: function($scope, flickrApi) {
+        controller: function($scope, flickrApi, selectedPhoto, $location) {
           var vm = this;
           vm.tag = '';
           vm.userId = '';
@@ -34,7 +34,10 @@ angular.module('flickrAPI').directive('searchPage', function() {
             vm.tag = '';
             vm.userId = '';
           };
-          vm.all = function(img) {
+          vm.batch = function(img) {
+            selectedPhoto.setTag(img.tag);
+            selectedPhoto.setUser(img.user_id||'');
+            $location.url('/all');
           };
         },
         controllerAs: 'search',
