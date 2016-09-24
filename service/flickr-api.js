@@ -12,7 +12,7 @@ angular.module('flickrAPI').factory('flickrApi',['$http', 'flickrUtils', functio
     var _getFlickrImage = function(tag, userId) {
       if (dataLoading) return;
 			dataLoading = true;
-			$http.jsonp(url + '?method=' + methods.search +
+			return $http.jsonp(url + '?method=' + methods.search +
       '&api_key=' + flickrUtils.KEY +
       '&tags=' + tag +
 			'&per_page=' + perPage +
@@ -21,11 +21,12 @@ angular.module('flickrAPI').factory('flickrApi',['$http', 'flickrUtils', functio
       '&extras=' + extras +
 			'&format=json&' +
 			'jsoncallback=' + 'JSON_CALLBACK')
-				.then(function(data) {
-          console.log("data = ", data);
+				.then(function(response) {
+          console.log("response = ", response.data);
           dataLoading = false;
+          return response.data; 
         }, function(response) {
-          console.log('response', response);
+          console.log('error', response);
           dataLoading = false;
         });
     };
