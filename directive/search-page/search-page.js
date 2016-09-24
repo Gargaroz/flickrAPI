@@ -34,6 +34,8 @@ angular.module('flickrAPI').directive('searchPage', function() {
             vm.tag = '';
             vm.userId = '';
           };
+          vm.all = function(img) {
+          };
         },
         controllerAs: 'search',
         link: function(scope, element, attrs, fn) {

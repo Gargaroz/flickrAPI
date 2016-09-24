@@ -12,6 +12,9 @@ angular.module('flickrAPI').config(function($routeProvider) {
     .when('/search', {
       template: '<search-page></search-page>'
     })
+    .when('/all', {
+      template: '<all></all>'
+    })
     .otherwise({redirectTo:'/search'});
 
 });

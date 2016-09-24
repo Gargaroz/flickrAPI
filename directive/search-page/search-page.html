@@ -45,10 +45,10 @@
           <span title="Views" class="badge pull-right">{{img.views}}</span>
         </div>
         <div class="panel-body">
-          <a href="">
-            <img class="" ng-src="{{img.url_q}}" alt="">
+          <a ng-click="search.all(img)">
+            <img class="img-responsive" ng-src="{{img.url_q}}">
           </a>
-          <dl class="">
+          <dl>
             <dt>Title</dt>
             <dd>{{img.title}}</dd>
             <dt>Owner</dt>
