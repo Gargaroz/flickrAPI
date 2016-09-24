@@ -32,25 +32,33 @@
       </div>
     </div>
   </form>
+  <div class="row" ng-if="search.photoResults.length > 1">
+    <div class="col-xs-3">
+      <label for="filter">Filter images per</label>
+      <select id="filter" class="form-control" ng-model="search.filter" ng-options="filter.expression as filter.label for filter in search.filterOpts"></select>
+    </div>
+  </div>
   <div class="row">
-    <div class="col-xs-12 col-sm-4 media" ng-repeat="img in search.photoResults track by $index">
-      <div class="media-left">
-        <a href="">
-          <img class="media-object" ng-src="{{img.url_q}}" alt="">
-        </a>
-      </div>
-      <div class="media-body">
-        <h4 class="media-heading">{{img.tag}} <span title="Views" class="badge">{{img.views}}</span></h4>
-        <dl class="">
-          <dt>Title</dt>
-          <dd>{{img.title}}</dd>
-          <dt>Owner</dt>
-          <dd>{{img.ownername}}</dd>
-          <dt>Taken</dt>
-          <dd>{{img.datetaken}}</dd>
-          <dt>Uploaded</dt>
-          <dd>{{img.dateupload * 1000 | date:"yyyy-MM-dd hh:mm:ss Z"}}</dd>
-        </dl>
+    <div class="col-xs-12 col-sm-4" ng-repeat="img in search.photoResults | orderBy: search.filter track by $index">
+      <div class="panel panel-default">
+        <div class="panel-heading">{{img.tag}}
+          <span title="Views" class="badge pull-right">{{img.views}}</span>
+        </div>
+        <div class="panel-body">
+          <a href="">
+            <img class="" ng-src="{{img.url_q}}" alt="">
+          </a>
+          <dl class="">
+            <dt>Title</dt>
+            <dd>{{img.title}}</dd>
+            <dt>Owner</dt>
+            <dd>{{img.ownername}}</dd>
+            <dt>Taken</dt>
+            <dd>{{img.datetaken}}</dd>
+            <dt>Uploaded</dt>
+            <dd>{{img.dateupload * 1000 | date:"yyyy-MM-dd hh:mm:ss"}}</dd>
+          </dl>
+        </div>
       </div>
     </div>
   </div>

@@ -9,6 +9,13 @@ angular.module('flickrAPI').directive('searchPage', function() {
           vm.tag = '';
           vm.userId = '';
           vm.photoResults = [];
+          vm.filterOpts = [
+            {label: 'Views', expression: '-views'},
+            {label: 'Taken', expression: '-ownername'},
+            {label: 'Uploaded', expression: '-datetaken'},
+            {label: 'Owner', expression: '-dateupload'},
+          ];
+          vm.filter = vm.filterOpts[0].expression;
           vm.getFlickrImage = function() {
             vm.errorMessage = '';
             flickrApi.getFlickrImage(vm.tag, vm.userId).then(function(ret){
@@ -17,6 +24,7 @@ angular.module('flickrAPI').directive('searchPage', function() {
               } else if (ret.photos.photo.length == 1) {
                 var photo = ret.photos.photo.pop();
                 photo.tag = vm.tag;
+                photo.views = parseInt(photo.views);
                 vm.photoResults.unshift(photo);
               } else vm.errorMessage = 'No photos found'
               vm.clear();
