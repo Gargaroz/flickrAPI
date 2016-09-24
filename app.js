@@ -1,5 +1,10 @@
 angular.module('flickrAPI', ['ui.bootstrap','ngRoute','ngAnimate']);
 
+angular.module('flickrAPI')
+    .constant('flickrUtils', {
+        'KEY': '67f59afcdeccaf96290643f0a4b73396'
+    });
+
 angular.module('flickrAPI').config(function($routeProvider) {
 
     /* Add New Routes Above */
